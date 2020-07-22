@@ -108,11 +108,11 @@ class GeoType(str, Enum):
     geo type
     """
 
+    state = "state"
     county = "county"
     hrr = "hrr"
     msa = "msa"
     dma = "dma"
-    state = "state"
 
 
 class MetaData(BaseModel):
