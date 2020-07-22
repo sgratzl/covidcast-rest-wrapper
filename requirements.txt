@@ -3,4 +3,7 @@ uvicorn
 invoke
 covidcast
 requests
-aiohttp[speedups]
+aiohttp
+cchardet
+aiodns
+brotlipy
