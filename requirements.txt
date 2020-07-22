@@ -2,3 +2,5 @@ fastapi
 uvicorn
 invoke
 covidcast
+requests
+aiohttp[speedups]

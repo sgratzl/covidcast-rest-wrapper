@@ -62,4 +62,4 @@ def run(c):
     """
     Lint code
     """
-    c.run("uvicorn src/main:app --reload")
+    c.run("cd src && uvicorn main:app --reload")
