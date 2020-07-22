@@ -214,7 +214,7 @@ class SignalData(BaseModel):
 
 
 app = FastAPI()
-session = aiohttp.ClientSession()
+# session = aiohttp.ClientSession()
 
 app.add_middleware(
     CORSMiddleware,
@@ -248,15 +248,16 @@ def _format_params(params: Dict[str, Any]) -> Dict[str, str]:
 
 async def _fetch(params: Dict[str, Union[str, int, float, date, List[str], List[int], List[float], List[date]]]):
     params['cached'] = True
-    async with session.get(URL, params=_format_params(params)) as resp:
-        print(resp.url)
-        res = await resp.json()
-        result = res.get('result', 0)
-        if result == -2:
-            raise HTTPException(status_code=400, detail=f"no results: {resp.url}")
-        if result != 1:
-            raise HTTPException(status_code=500, detail=res["message"])
-        return res.get("epidata", [])
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(URL, params=_format_params(params)) as resp:
+            res = await resp.json()
+            result = res.get('result', 0)
+            if result == -2:
+                raise HTTPException(status_code=400, detail=f"no results: {resp.url}")
+            if result != 1:
+                raise HTTPException(status_code=500, detail=res["message"])
+            return res.get("epidata", [])
 
 
 @app.get('/metadata', response_model=List[MetaData])
@@ -343,9 +344,9 @@ def root():
     return {"message": "Hello World"}
 
 
-@app.on_event("shutdown")
-async def cleanup():
-    """
-    cleanup session
-    """
-    await session.close()
+# @app.on_event("shutdown")
+# async def cleanup():
+#     """
+#     cleanup session
+#     """
+#     await session.close()
