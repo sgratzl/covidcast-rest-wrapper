@@ -169,11 +169,13 @@ class SignalData(BaseModel):
     """
     the signal’s standard error, if available.
     """
-    sample_size: int
+    sample_size: Optional[int]
     """
     indicates the sample size available in that geography on that day; sample size may not be available for all signals, due to privacy or other constraints.
     """
-    direction: int
+    direction: Optional[int]
     """
     uses a local linear fit to estimate whether the signal in this region is currently increasing or decreasing (reported as -1 for decreasing, 1 for increasing, and 0 for neither).
     """
+    lag: int
+    issue: int
