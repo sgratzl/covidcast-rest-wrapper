@@ -10,7 +10,6 @@ pylint = ">=2.4.3"
 black = "*"
 
 [packages]
-covidcast = "*"
 fastapi = "*"
 uvicorn = "*"
 aiohttp = "*"

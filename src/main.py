@@ -299,7 +299,7 @@ async def get_generic_signal(data_source: str, signal: str, time_type: TimeType,
 @app.get('/signal/{signal}', response_model=List[SignalData])
 async def get_signal(signal: SignalType, time_type: TimeType, geo_type: GeoType, time_values: Optional[List[date]] = Query(None), geo_value: str = '*'):
     """
-    return the raw meta data
+    return the signal values
     :param signal
     :geo_value
     """
@@ -311,6 +311,25 @@ async def get_signal(signal: SignalType, time_type: TimeType, geo_type: GeoType,
         'time_type': time_type,
         'geo_type': geo_type,
         'time_values': time_values or [_get_day_offset(2)],
+        'geo_value': geo_value
+    })
+
+
+@app.get('/signal/{signal}/range', response_model=List[SignalData])
+async def get_signal_range(signal: SignalType, time_type: TimeType, geo_type: GeoType, from_time: date, to_time: date, geo_value: str = '*'):
+    """
+    return the signal values given a time range
+    :param signal
+    :geo_value
+    """
+    source = signal_to_data_source[signal]
+    return await _fetch({
+        'source': 'covidcast',
+        'data_source': source,
+        'signal': signal,
+        'time_type': time_type,
+        'geo_type': geo_type,
+        'time_values': f"{_format_date(from_time)}-{_format_date(to_time)}",
         'geo_value': geo_value
     })
 
