@@ -306,7 +306,7 @@ async def get_generic_signal(
 
 
 @app.get("/signal/{signal}", response_model=List[SignalData])
-async def get_signal(signal: SignalType, time_type: TimeType, geo_type: GeoType, time_values: Optional[List[date]] = Query(None, title="format YYYY-MM-DD"), geo_value: str = "*"):
+async def get_signal(signal: SignalType, time_type: TimeType, geo_type: GeoType, time_values: Optional[List[date]] = Query(None, description="format YYYY-MM-DD"), geo_value: str = "*"):
     """
     return the signal values
     :param signal
@@ -320,7 +320,12 @@ async def get_signal(signal: SignalType, time_type: TimeType, geo_type: GeoType,
 
 @app.get("/signal/{signal}/range", response_model=List[SignalData])
 async def get_signal_range(
-    signal: SignalType, time_type: TimeType, geo_type: GeoType, from_time: date = Query(..., title="format: YYYY-MM-DD"), to_time: date = Query(..., title="format: YYYY-MM-DD"), geo_value: str = "*"
+    signal: SignalType,
+    time_type: TimeType,
+    geo_type: GeoType,
+    from_time: date = Query(..., description="format: YYYY-MM-DD"),
+    to_time: date = Query(..., description="format: YYYY-MM-DD"),
+    geo_value: str = "*",
 ):
     """
     return the signal values given a time range
