@@ -1,12 +1,10 @@
 {
-    "version": 2,
-    "public": false,
-    "builds": [{ "src": "src/main.py", "use": "@now/python" }],
-    "routes": [
-        { "src": "/", "dest": "src/main.py" },
-        { "src": "/(.*)", "dest": "src/main.py" }
-    ],
-    "github": {
-        "silent": true
-    }
+  "version": 2,
+  "public": false,
+  "builds": [{ "src": "src/main.py", "use": "@now/python" }],
+  "routes": [{ "src": "/(.*)", "dest": "src/main.py" }],
+  "redirects": [{ "source": "/", "destination": "/docs" }],
+  "github": {
+    "silent": true
+  }
 }
