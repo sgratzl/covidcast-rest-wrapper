@@ -4,6 +4,7 @@ covidcast rest wrapper
 from enum import Enum
 from typing import List, Dict, Union, Optional, Any
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import date, timedelta
 import aiohttp
 import asyncio
@@ -12,6 +13,14 @@ from model import MetaData, SignalData, SignalType, signal_to_data_source, TimeT
 
 app = FastAPI()
 session = aiohttp.ClientSession()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 URL = "https://api.covidcast.cmu.edu/epidata/api.php"
 
