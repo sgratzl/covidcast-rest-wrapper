@@ -6,8 +6,8 @@ from typing import List, Dict, Union, Optional, Any
 from datetime import date, timedelta
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-import aiohttp
 from pydantic import BaseModel
+import aiohttp
 
 
 class SignalType(str, Enum):
