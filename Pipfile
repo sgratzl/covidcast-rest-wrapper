@@ -14,6 +14,7 @@ covidcast = "*"
 fastapi = "*"
 uvicorn = "*"
 aiohttp = "*"
+cchardet = "*"
 
 [requires]
 python_version = "3.7"
