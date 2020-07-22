@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-invoke
-covidcast
-requests
-aiohttp
-cchardet
-aiodns
-brotlipy
