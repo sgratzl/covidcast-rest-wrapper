@@ -24,7 +24,7 @@ SOURCE_DIR = ROOT_DIR.joinpath("src")
 DOCS_DIR = ROOT_DIR.joinpath("docs")
 DOCS_BUILD_DIR = DOCS_DIR.joinpath("_build")
 DOCS_INDEX = DOCS_BUILD_DIR.joinpath("index.html")
-PYTHON_DIRS = [str(d) for d in [SOURCE_DIR, TEST_DIR]]
+PYTHON_DIRS = [str(d) for d in [SOURCE_DIR]]
 
 
 def _delete_file(file):
