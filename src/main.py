@@ -3,13 +3,12 @@ covidcast rest wrapper
 """
 from enum import Enum
 from typing import List, Dict, Union, Optional, Any
+from datetime import date, timedelta
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import date, timedelta
 import aiohttp
-import asyncio
 
-from model import MetaData, SignalData, SignalType, signal_to_data_source, TimeType, DateType, GeoType
+from model import MetaData, SignalData, SignalType, signal_to_data_source, TimeType, GeoType
 
 app = FastAPI()
 session = aiohttp.ClientSession()
@@ -26,8 +25,8 @@ URL = "https://api.covidcast.cmu.edu/epidata/api.php"
 
 # covidcast.signal(data_source, signal, start_day=None, end_day=None, geo_type='county', geo_values='*')¶
 
-def _format_date(d: date) -> str:
-    return d.strftime('%Y%m%d')
+def _format_date(date_obj: date) -> str:
+    return date_obj.strftime('%Y%m%d')
 
 
 def _format_params(params: Dict[str, Any]) -> Dict[str, str]:
@@ -124,4 +123,7 @@ def root():
 
 @app.on_event("shutdown")
 async def cleanup():
+    """
+    cleanup session
+    """
     await session.close()

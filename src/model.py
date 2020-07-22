@@ -7,6 +7,10 @@ from pydantic import BaseModel
 
 
 class SignalType(str, Enum):
+    """
+    signal
+    """
+
     smoothed_adj_cli = 'smoothed_adj_cli'
     """
     Doctor’s Visits
@@ -23,7 +27,7 @@ class SignalType(str, Enum):
     """
     Symptoms in Community (Facebook)
     """
-    full_time_work_prop= 'full_time_work_prop'
+    full_time_work_prop = 'full_time_work_prop'
     """
     Away from Home 6hr+ (SafeGraph)
     """
@@ -57,6 +61,9 @@ class SignalType(str, Enum):
     """
 
 class DataSourceType(str, Enum):
+    """
+    data sources
+    """
     doctor_visits = 'doctor-visits'
     hospital_admission = 'hospital-admissions'
     fb_survey = 'fb-survey'
@@ -80,14 +87,16 @@ signal_to_data_source = {
 }
 
 class TimeType(str, Enum):
-    day = "day"
-    week = "week"
-
-class DateType(str, Enum):
+    """
+    time type
+    """
     day = "day"
     week = "week"
 
 class GeoType(str, Enum):
+    """
+    geo type
+    """
     county = "county"
     hrr = 'hrr'
     msa = 'msa'
@@ -96,6 +105,10 @@ class GeoType(str, Enum):
 
 
 class MetaData(BaseModel):
+    """
+    meta  data
+    """
+
     data_source: str
     """
     data source name
@@ -106,11 +119,14 @@ class MetaData(BaseModel):
     """
     time_type: TimeType
     """
-    Temporal resolution at which this signal is reported. “day”, for example, means the signal is reported daily.
+    Temporal resolution at which this signal is reported. “day”,
+    for example, means the signal is reported daily.
     """
     geo_type: GeoType
     """
-    Geographic level for which this signal is available, such as county, state, msa, or hrr. Most signals are available at multiple geographic levels and will hence be listed in multiple rows with their own metadata.
+    Geographic level for which this signal is available, such as county,
+    state, msa, or hrr. Most signals are available at multiple geographic
+    levels and will hence be listed in multiple rows with their own metadata.
     """
     min_time: int
     """
@@ -122,7 +138,9 @@ class MetaData(BaseModel):
     """
     num_locations: int
     """
-    Number of distinct geographic locations available for this signal. For example, if geo_type is county, the number of counties for which this signal has ever been reported.
+    Number of distinct geographic locations available for this signal.
+    For example, if geo_type is county, the number of counties for which
+    this signal has ever been reported.
     """
     min_value: float
     """
@@ -153,6 +171,10 @@ class MetaData(BaseModel):
 
 
 class SignalData(BaseModel):
+    """
+    signal data
+    """
+
     geo_value: str
     """
     identifies the location, such as a state name or county FIPS code.
@@ -163,7 +185,9 @@ class SignalData(BaseModel):
     """
     value: float
     """
-    the signal quantity requested. For example, in a query for the confirmed_cumulative_num signal from the usa-facts source, this would be the cumulative number of confirmed cases in the area, as of the time_value.
+    the signal quantity requested. For example, in a query for the
+    confirmed_cumulative_num signal from the usa-facts source,
+    this would be the cumulative number of confirmed cases in the area, as of the time_value.
     """
     stderr: Optional[float]
     """
@@ -171,11 +195,14 @@ class SignalData(BaseModel):
     """
     sample_size: Optional[int]
     """
-    indicates the sample size available in that geography on that day; sample size may not be available for all signals, due to privacy or other constraints.
+    indicates the sample size available in that geography on that day;
+    sample size may not be available for all signals, due to privacy or other constraints.
     """
     direction: Optional[int]
     """
-    uses a local linear fit to estimate whether the signal in this region is currently increasing or decreasing (reported as -1 for decreasing, 1 for increasing, and 0 for neither).
+    uses a local linear fit to estimate whether the signal in this
+    region is currently increasing or decreasing (reported as -1 for decreasing,
+    1 for increasing, and 0 for neither).
     """
     lag: int
     issue: int
