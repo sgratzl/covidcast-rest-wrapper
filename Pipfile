@@ -13,6 +13,7 @@ black = "*"
 covidcast = "*"
 fastapi = "*"
 uvicorn = "*"
+aiohttp[speedups] = "*"
 
 [requires]
 python_version = "3.7"
