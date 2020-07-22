@@ -2,6 +2,21 @@
 
 [![License: MIT][mit-image]][mit-url] [![Github Actions][github-actions-image]][github-actions-url]
 
+Covidcast REST API Wrapper based on FastAPI and Vercel
+
+API:
+https://covidcast-rest-wrapper.vercel.app
+
+Swagger UI:
+
+https://covidcast-rest-wrapper.vercel.app/docs
+
+ReDoc UI:
+
+https://covidcast-rest-wrapper.vercel.app/redoc
+
+
+
 
 ## Development
 
